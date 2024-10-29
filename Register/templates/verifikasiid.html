@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Face</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+</head>
+<body class="bg-blue-500">
+    <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="bg-white py-8 px-6 shadow sm:rounded-lg sm:px-10 sm:mx-auto sm:w-full sm:max-w-md">
+            <h2 class="text-center text-2xl leading-9 font-semibold text-gray-900 mb-4">
+                Silahkan Verifikasi Wajah Anda
+            </h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <div class="mb-4">
+                  {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} text-center text-red-500 font-semibold">{{ message }}</div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+
+            <form action="/verify" method="POST" class="flex space-x-4">
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400 focus:outline-none focus:shadow-outline transition ease-in-out duration-150">
+                    Capture and Verify
+                </button>
+                <a href="{{ url_for('index') }}" class="w-full flex justify-center py-2 px-4 border border-blue-500 text-sm font-medium rounded-md text-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none focus:shadow-outline transition ease-in-out duration-150">
+                    Kembali ke Registrasi
+                </a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

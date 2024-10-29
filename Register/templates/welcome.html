@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Datang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+</head>
+<body class="bg-blue-500">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-md sm:w-full sm:max-w-md">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-900">Selamat Datang!</h2>
+            <p class="text-lg text-gray-700 mb-2">Nama: {{ user.name }}</p>
+            <p class="text-lg text-gray-700 mb-2">Jabatan: {{ user.position }}</p>
+            <p class="text-lg text-gray-700 mb-2">ID Pengguna: {{ user.user_id }}</p>
+            <p class="text-lg text-gray-700">Waktu Verifikasi: {{ log.timestamp }}</p>
+            <p class="text-lg text-gray-700 mb-4">
+                Status: 
+                {% if log.check_in %}
+                    <span class="font-semibold text-green-600">Anda berhasil Check-In.</span>
+                {% elif log.check_out %}
+                    <span class="font-semibold text-blue-600">Anda berhasil Check-Out.</span>
+                {% else %}
+                    <span class="font-semibold text-red-600">Gagal menentukan status Check-In/Check-Out.</span>
+                {% endif %}
+            </p>
+            <div class="mt-6">
+                <a href="{{ url_for('verify_user') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400 transition ease-in-out duration-150 w-full flex justify-center">
+                    Kembali ke Verifikasi
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
