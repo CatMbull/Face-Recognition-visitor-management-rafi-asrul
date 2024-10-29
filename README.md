@@ -1,0 +1,1 @@
+ini adalah Face recognition dengan check in dan check out, untuk second web sebagai komunikasi dengan web secondweb tersebut, jika ada aktifitas check in check out, gagal atau error server pasti selalu ada komunikasi
