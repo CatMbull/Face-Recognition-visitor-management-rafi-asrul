@@ -1124,10 +1124,6 @@ video {
     width: 50%;
   }
 
-  .lg\:w-auto {
-    width: auto;
-  }
-
   .lg\:max-w-full {
     max-width: 100%;
   }

@@ -156,7 +156,17 @@ def logout():
     session.pop('admin', None)
     return redirect(url_for('login'))
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'admin' not in session:
+            flash('Silakan login untuk mengakses halaman ini.', 'warning')
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/users')
+@login_required
 def list_users():
     users = User.query.all()
     logs = VerificationLog.query.order_by(VerificationLog.timestamp.desc()).all() 
