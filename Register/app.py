@@ -8,6 +8,7 @@ import numpy as np
 from functools import wraps
 from datetime import datetime, timedelta, timezone
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 
 instance_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance')
 
@@ -16,6 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.instance
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'MbullGendutBoyot200kg'
 CORS(app)
+hashed_password = generate_password_hash("adminpassword")
 
 db = SQLAlchemy(app)
 
@@ -141,7 +143,7 @@ def login():
         password = request.form['password']
 
         # Cek kredensial login admin
-        if username == 'admin' and password == 'adminpassword':
+        if username == 'admin' and check_password_hash(hashed_password, password):
             session['admin'] = True
             return redirect(url_for('list_users'))
         else:
